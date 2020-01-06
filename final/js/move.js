@@ -7,6 +7,7 @@ var playericon = [document.getElementById("red"), document.getElementById("yello
 var playercolor = [document.getElementById("red").id, document.getElementById("yellow").id, document.getElementById("green").id, document.getElementById("blue").id];
 var playername = [document.getElementById("red").name, document.getElementById("yellow").name, document.getElementById("green").name, document.getElementById("blue").name];
 var bankruptcheck = [false, false, false, false];
+var injailcheck = [false, false, false, false];
 //var playercolor = [document.getElementValue("player1"), document.getElementValue("player2"), document.getElementValue("player3"), document.getElementValue("player4")];
 var turn = 1;
 var bankrupt = 0;
@@ -21,7 +22,8 @@ var jsImg = new Array("image/dice1.jpg", "image/dice2.jpg", "image/dice3.jpg", "
 function randomdice() {
     //陣列的長度 * 介於0~1間數字 ，然後在取 floor 當照片索引值
     var imgIndex = Math.floor(Math.random() * jsImg.length);
-    document.getElementById("dice").src = jsImg[imgIndex];
+    document.getElementById("dice1").src = jsImg[imgIndex];
+    document.getElementById("dice2").src = jsImg[imgIndex];
 }
 var go;
 var startmove;
@@ -37,43 +39,9 @@ function wait() {
 
 }
 
-function fate() {
-    var fatenum = Math.floor(Math.random() * 1);
-    var fatetext;
-    if (fatenum == 0) {
-        fatetext = "經營小本生意，獲得1000元";
-        playerMoney[turn - 1] += 1000;
-        document.getElementById("player1Money").innerHTML = playername[turn - 1] + ": " + playerMoney[turn - 1];
-    }
-    document.getElementById("fatecard").innerHTML = fatetext;
-}
-
-function chance() {
-    var chancenum = Math.floor(Math.random() * 1);
-    var chancetext;
-    if (chancenum == 0) {
-        chancetext = "經營小本生意，獲得1000元";
-        playerMoney[turn - 1] += 1000;
-        document.getElementById("player1Money").innerHTML = playername[turn - 1] + ": " + playerMoney[turn - 1];
-    }
-    document.getElementById("chancecard").innerHTML = chancetext;
-}
-
-
-
-/*class block {
-    constructor(number, name, owner, price) {
-        this.number = number;
-        this.name = name;
-        this.owner = owner;
-        this.price = price;
-    }
-}*/
-
-//澎湖 = new block(1, "澎湖", "bank", 600);
 var blocktype = [
         [0, "澎湖", 2, "金門", 4, "台北火車站", "桃園", 3, "新竹", "北埔", 0, "苗栗", "風力發電廠", "南投", "日月潭", "台中火車站", "彰化", 2, "雲林", "嘉義", 0, "台南", 3, "高雄", "屏東", "高雄火車站", "墾丁", "宜蘭", "自來水廠", "花蓮", 5, "合歡山", "台東", 2, "知本", "台東火車站", 3, "陽明山", 4, "台北"],
-        [0, 600, 0, 600, 0, 2000, 1000, 0, 1000, 1200, 0, 1400, 1500, 1400, 1600, 2000, 1800, 0, 1800, 2000, 0, 2200, 0, 2200, 2400, 2000, 2600, 2600, 1500, 2800, 0, 3000, 3000, 0, 3200, 2000, 0, 3500, 4000],
+        [0, 600, 0, 600, 0, 2000, 1000, 0, 1000, 1200, 0, 1400, 1500, 1400, 1600, 2000, 1800, 0, 1800, 2000, 0, 2200, 0, 2200, 2400, 2000, 2600, 2600, 1500, 2800, 0, 3000, 3000, 0, 3200, 2000, 0, 3500, 0, 4000],
         [0]
     ]
     //名字、價格、所有者、
@@ -110,9 +78,13 @@ $(() => {
             playerMoney[3] = $("#startMoney").val();
             givemoney = true;
         }
-        var step = Math.floor((Math.random() * 6) + 1);
+        var step1 = Math.floor((Math.random() * 6) + 1);
+        var step2 = Math.floor((Math.random() * 6) + 1);
+        var step = step1 + step2;
         //alert(playername[turn - 1] + "擲出" + step + "點");
-        document.getElementById("dice").src = "image/dice" + step + ".jpg";
+        document.getElementById("dice1").src = "image/dice" + step1 + ".jpg";
+        document.getElementById("dice2").src = "image/dice" + step2 + ".jpg";
+        document.getElementById("totalstep").innerHTML = step;
         clearInterval(go);
 
         playerpos[turn - 1] += step;
@@ -123,10 +95,6 @@ $(() => {
             playerMoney[turn - 1] += 2000;
             document.getElementById("player1Money").innerHTML = playername[turn - 1] + ": " + playerMoney[turn - 1];
         }
-        //alert(blocktype[1][1]);
-        // alert('player' + turn);
-
-
         //var position = $('[name="player' + turn + '"]').offset();
         //alert(position);
         //var posx = position.left;
@@ -141,10 +109,28 @@ $(() => {
             //alert("看看走到哪");
             if (playerpos[turn - 1] == 2 || playerpos[turn - 1] == 17 || playerpos[turn - 1] == 33) {
                 alert("抽一張命運卡");
-                fate();
+                var fatenum = Math.floor(Math.random() * 1);
+                var fatetext;
+                if (fatenum == 0) {
+                    fatetext = '經營小本生意<br>獲得1000元';
+                    playerMoney[turn - 1] += 1000;
+                    alert("現在有" + playerMoney[turn - 1]);
+                    document.getElementById(playername[turn - 1] + "Money").innerHTML = playername[turn - 1] + ": " + playerMoney[turn - 1];
+                }
+                document.getElementById("fatecard").src = "image/white.png";
+                document.getElementById("fateword").innerHTML = fatetext;
             } else if (playerpos[turn - 1] == 7 || playerpos[turn - 1] == 22 || playerpos[turn - 1] == 36) {
                 alert("抽一張機會卡");
-
+                var chancenum = Math.floor(Math.random() * 1);
+                var chancetext;
+                if (chancenum == 0) {
+                    chancetext = '種樂透<br>獲得2000元';
+                    playerMoney[turn - 1] += 2000;
+                    alert("現在有" + playerMoney[turn - 1]);
+                    document.getElementById(playername[turn - 1] + "Money").innerHTML = playername[turn - 1] + ": " + playerMoney[turn - 1];
+                }
+                document.getElementById("chancecard").src = "image/white.png";
+                document.getElementById("chanceword").innerHTML = chancetext;
             } else if (playerpos[turn - 1] == 4 || playerpos[turn - 1] == 38) {
                 alert("繳納所得稅 扣除2000元!");
                 playerMoney[turn - 1] -= 2000;
@@ -153,6 +139,9 @@ $(() => {
 
             } else if (playerpos[turn - 1] == 30) {
                 alert("前往監獄 並暫停一回合!");
+                playericon[turn - 1].style.left = blockx[10] + "px";
+                playericon[turn - 1].style.top = blocky[10] + "px";
+                injailcheck[turn - 1] = true;
             } else if (blocktype[2][playerpos[turn - 1]] == null) {
                 if (confirm("是否花" + blocktype[1][playerpos[turn - 1]] + "元購買" + blocktype[0][playerpos[turn - 1]]) == true) {
                     playerMoney[turn - 1] -= blocktype[1][playerpos[turn - 1]];
@@ -162,7 +151,9 @@ $(() => {
                     $("#" + blocktype[0][playerpos[turn - 1]]).css("background-color", playercolor[turn - 1]);
                     // alert("玩家" + turn + "已購買" + blocktype[0][playerpos[turn - 1]]);
                 }
-            } else if (blocktype[2][playerpos[turn - 1]] != null) {
+            } else if (blocktype[2][playerpos[turn - 1]] == turn) {
+                alert("自己的地產 無須過路費");
+            } else if (blocktype[2][playerpos[turn - 1]] != turn) {
                 //alert("現在在" + playerpos[turn - 1]);
                 var owner = blocktype[2][playerpos[turn - 1]];
                 alert("經過player" + blocktype[2][playerpos[turn - 1]] + "的地產 支付過路費" + blocktype[1][playerpos[turn - 1]] + "元!");
@@ -178,6 +169,10 @@ $(() => {
             if (turn < playernum) {
                 turn++;
                 while (bankruptcheck[turn - 1] == true) {
+                    turn++;
+                }
+                while (injailcheck[turn - 1] == true) {
+                    injailcheck[turn - 1] = false;
                     turn++;
                 }
                 document.getElementById("playerthrow").innerHTML = "輪到" + playername[turn - 1];
