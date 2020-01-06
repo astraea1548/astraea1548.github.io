@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-TW">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- 自訂義按鈕樣式 -->
+    <link rel="stylesheet" href="./css/IMAGE.css">
+    <title>大富翁</title>
+</head>
+
+<body background="image/coins.png">
+    <div id="Title">網頁版大富翁</div>
+    <DIV ID="input">
+        <form>
+            玩家人數：
+            <select id="playerNumber">
+        　<option value=1>1</option>
+        　<option value=2>2</option>
+        　<option value=3>3</option>
+        　<option value=4 SELECTED> 4</option>
+        </select>
+        </form>
+        <br>
+        <form>
+            起始金額：
+            <input type="text" id="startMoney" value="15000" onkeyup="value=value.replace(/[^\d]/g,'')">
+        </form>
+        <button type='button' id='start'>開始遊戲</button>
+    </DIV>
+    <div id="board" style="visibility: hidden;">
+        <table align="center" border="5px">
+            <tr border="5px">
+                <td border="5px" WIDTH=100>休息區<img src="image/free.png" id="onboard"></td>
+                <td WIDTH=100 id="台南">台南<br>$2200</td>
+                <td WIDTH=100><img src="image/chance card.jpg" width="100px"></td>
+                <td WIDTH=100 id="高雄">高雄<br>$2200</td>
+                <td WIDTH=100 id="屏東">屏東<br>$2400</td>
+                <td WIDTH=100 id="高雄火車站">高雄火車站<br>$2000</td>
+                <td WIDTH=100 id="墾丁">墾丁<br>$2600</td>
+                <td WIDTH=100 id="宜蘭">宜蘭<br>$2600</td>
+                <td WIDTH=100 id="自來水廠">自來水廠<br>$1500</td>
+                <td WIDTH=100 id="花蓮">花蓮<br>$2800</td>
+                <td WIDTH=100>進監獄<img src="image/gojail.jpg" id="onboard"></td>
+            </tr>
+            <tr>
+                <td border="5px" id="嘉義">嘉義<br>$2000</td>
+                <td colspan=9 rowspan="9"><img src="image/chance card.jpg" width="200px" height="200px" id="fatecard"><img src="image/dice6.jpg" id="dice" width="200px" height="200px"><img src="image/fate card.jpg" width="200px" height="200px" id="chancecard"><br><br></td>
+                <td id="合歡山">合歡山<br>$3000</td>
+            </tr>
+            <tr>
+                <td id="雲林">雲林<br>$1800</td>
+                <td id="台東">台東<br>$3000</td>
+            </tr>
+            <tr>
+                <td WIDTH=100><img src="image/fate card.jpg" height="50px"></td>
+                <td WIDTH=100><img src="image/fate card.jpg" height="50px"></td>
+            </tr>
+            <tr>
+                <td id="彰化">彰化<br>$1800</td>
+                <td id="知本">知本<br>$3200</td>
+            </tr>
+            <tr>
+                <td id="台中火車站">台中火車站<br>$2000</td>
+                <td id="台東火車站">台東火車站<br>$2000</td>
+            </tr>
+            <tr>
+                <td id="日月潭">日月潭<br>$1600</td>
+                <td><img src="image/chance card.jpg" height="50px"></td>
+            </tr>
+            <tr>
+                <td id="南投">南投<br>$1400</td>
+                <td id="陽明山">陽明山<br>$3500</td>
+            </tr>
+            <tr>
+                <td id="風力發電廠">風力發電廠<br>$1500</td>
+                <td>繳稅<img src="image/tax.png" height="20px"><br>-$2000</td>
+            </tr>
+            <tr>
+                <td id="苗栗">苗栗<br>$1400</td>
+                <td id="台北">台北<br>$4000</td>
+            </tr>
+            <tr>
+                <td>路過監獄<br><img src="image/jail.jpg" id="onboard"></td>
+                <td id="北埔">北埔<br>$1200</td>
+                <td id="新竹">新竹<br>$1000</td>
+                <td><img src="image/chance card.jpg" width="100px"></td>
+                <td id="桃園">桃園<br>$1000</td>
+                <td id="台北火車站">台北火車站<br>$2000</td>
+                <td>繳稅<br><img src="image/tax.png" height="50px"><br>-$2000</td>
+                <td id="金門">金門<br>$600</td>
+                <td><img src="image/fate card.jpg" width="100px"></td>
+                <td id="澎湖">澎湖<br>$600</td>
+                <td>經過起點<br>+$2000<img src="image/start.jpg" id="onboard"></td>
+            </tr>
+            <img src="image/red.png" width="20" id="red" name="player1">
+            <img src="image/yellow.png" width="20" id="yellow" name="player2">
+            <img src="image/green.png" width="20" id="green" name="player3">
+            <img src="image/blue.png" width="20" id="blue" name="player4">
+        </table>
+    </div>
+    <div id="playerMoney" style="visibility: hidden;">
+        <span id="player1Money"> </span>
+        <span id="player2Money"> </span>
+        <br>
+        <span id="player3Money"> </span>
+        <span id="player4Money"> </span>
+    </div>
+    <div id='throwbutton' style="visibility: hidden;">
+        <span id="playerthrow">輪到player1</span>
+        <br>
+        <button type='button' id='throw_dice'>擲骰子</button>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- 引用自己寫的 js -->
+    <script src="./js/move.js"></script>
+</body>
+
+</html>

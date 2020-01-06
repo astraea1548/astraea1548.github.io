@@ -1,0 +1,141 @@
+#input {
+    position: absolute;
+    top: 100px;
+    left: 550px
+}
+
+#startmoney {
+    width: 50px;
+    height: 30px;
+}
+
+#start {
+    position: relative;
+    top: 30px;
+    left: 25px;
+    width: 120px;
+    height: 40px;
+    font-size: 20px;
+}
+
+#Title {
+    position: relative;
+    font-size: 50px;
+    text-align: center;
+}
+
+body {
+    background-size: 1000px 600px;
+    font-family: Microsoft JhengHei;
+}
+
+table {
+    text-align: center;
+    border-collapse: collapse;
+}
+
+td {
+    vertical-align: middle;
+    WIDTH: 80;
+    border: 3px solid black;
+    font-weight: bold;
+    background-color: white;
+}
+
+tr {
+    vertical-align: middle;
+}
+
+#throw_dice {
+    position: relative;
+    top: 330px;
+    left: 530px;
+    WIDTH: 100px;
+    height: 50px;
+}
+
+#playerthrow {
+    color: red;
+    position: relative;
+    top: 330px;
+    left: 510px;
+    WIDTH: 100px;
+    height: 50px;
+}
+
+#board {
+    position: absolute;
+    top: 0px;
+    left: 0px
+}
+
+#red {
+    position: relative;
+    top: 670px;
+    left: 1050px;
+}
+
+#yellow {
+    position: relative;
+    top: 670px;
+    left: 1050px
+}
+
+#green {
+    position: relative;
+    top: 670px;
+    left: 1050px
+}
+
+#blue {
+    position: relative;
+    top: 670px;
+    left: 1050px
+}
+
+#playerMoney {
+    position: relative;
+    top: 0px;
+    left: 0px
+}
+
+#player1Money {
+    color: red;
+    width: 400px;
+    position: relative;
+    top: 100px;
+    left: 200px
+}
+
+#player2Money {
+    color: yellow;
+    width: 400px;
+    position: relative;
+    top: 100px;
+    left: 500px
+}
+
+#player3Money {
+    color: green;
+    width: 400px;
+    position: relative;
+    top: 400px;
+    left: 200px;
+}
+
+#player4Money {
+    color: blue;
+    width: 400px;
+    position: relative;
+    top: 400px;
+    left: 500px;
+}
+
+span {
+    font-size: 30px;
+    -webkit-text-stroke: 0.3px #000;
+}
+
+#onboard {
+    width: 80px;
+}
