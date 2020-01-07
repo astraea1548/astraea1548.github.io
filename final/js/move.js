@@ -210,14 +210,19 @@ $(() => {
             }
             playericon[turn - 1].style.width = "35px";
             for (i = 0; i < playernum; i++) {
+                for (j = 0; j < playernum; j++) {
+                    if (bankruptcheck[j] == true) {
+                        i++
+                    }
+                }
                 if (playerMoney[i] <= 0) {
-                    alert("剩" + playerMoney[i]);
+                    //alert("剩" + playerMoney[i]);
                     alert(playername[i] + "已破產!");
                     bankruptcheck[i] = true;
                     bankrupt++;
                 }
             }
-            if (bankrupt >= playernum) {
+            if (bankrupt >= (playernum - 1)) {
                 for (i = 0; i < playernum; i++) {
                     if (bankruptcheck[i] == false) {
                         alert(playername[i] + "獲勝!");
