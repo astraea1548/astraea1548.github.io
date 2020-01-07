@@ -58,7 +58,7 @@ tr {
     color: red;
     position: relative;
     top: 180px;
-    left: 500px;
+    left: 450px;
     WIDTH: 100px;
     height: 50px;
 }
@@ -66,8 +66,8 @@ tr {
 #totalstep {
     font-size: 50px;
     position: relative;
-    top: -60px;
-    left: 140px;
+    top: -100px;
+    left: 550px;
     WIDTH: 100px;
     height: 100px;
 }
