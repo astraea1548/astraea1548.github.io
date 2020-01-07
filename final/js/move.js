@@ -118,7 +118,7 @@ $(() => {
                 var fatenum = Math.floor(Math.random() * 2);
                 var fatetext;
                 if (fatenum == 0) {
-                    fatetext = '經營小本生意<br>獲得1000元';
+                    fatetext = '經營小生意<br>獲得1000元';
                     playerMoney[turn - 1] += 1000;
                 } else if (fatenum == 1) {
                     fatetext = '拘票<br>立即坐牢!';
@@ -211,12 +211,13 @@ $(() => {
             playericon[turn - 1].style.width = "35px";
             for (i = 0; i < playernum; i++) {
                 if (playerMoney[i] <= 0) {
+                    alert("剩" + playerMoney[i]);
                     alert(playername[i] + "已破產!");
                     bankruptcheck[i] = true;
                     bankrupt++;
                 }
             }
-            if (bankrupt >= (playernum - 1)) {
+            if (bankrupt >= playernum) {
                 for (i = 0; i < playernum; i++) {
                     if (bankruptcheck[i] == false) {
                         alert(playername[i] + "獲勝!");
