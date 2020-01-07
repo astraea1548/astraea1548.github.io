@@ -126,6 +126,9 @@ $(() => {
                     playericon[turn - 1].style.left = blockx[10] + "px";
                     playericon[turn - 1].style.top = blocky[10] + "px";
                     injailcheck[turn - 1] = true;
+                } else if (fatenum == 3) {
+                    fatetext = '小偷光顧<br>損失500元';
+                    playerMoney[turn - 1] -= 500;
                 }
                 document.getElementById(playername[turn - 1] + "Money").innerHTML = playername[turn - 1] + ": " + playerMoney[turn - 1];
                 document.getElementById("fatecard").src = "image/white.png";
@@ -134,15 +137,18 @@ $(() => {
                 alert("抽一張機會卡");
                 playerMoney[turn - 1]++;
                 playerMoney[turn - 1]--;
-                var chancenum = Math.floor(Math.random() * 2);
+                var chancenum = Math.floor(Math.random() * 3);
                 var chancetext;
                 if (chancenum == 0) {
                     chancetext = '中樂透<br>獲得2000元';
 
                     playerMoney[turn - 1] += 2000;
                 } else if (chancenum == 1) {
-                    chancetext = '付學費<br>減少2000元';
-                    playerMoney[turn - 1] -= 2000;
+                    chancetext = '付學費<br>減少1500元';
+                    playerMoney[turn - 1] -= 1500;
+                } else if (chancenum == 2) {
+                    chancetext = '申請獎學金成功<br>獲得2400元';
+                    playerMoney[turn - 1] += 2400;
                 }
                 document.getElementById(playername[turn - 1] + "Money").innerHTML = playername[turn - 1] + ": " + playerMoney[turn - 1];
                 document.getElementById("chancecard").src = "image/white.png";
@@ -180,6 +186,7 @@ $(() => {
                 document.getElementById(playername[turn - 1] + "Money").innerHTML = playername[turn - 1] + ": " + playerMoney[turn - 1];
                 document.getElementById(playername[blocktype[2][playerpos[turn - 1]] - 1] + "Money").innerHTML = playername[blocktype[2][playerpos[turn - 1]] - 1] + ": " + playerMoney[blocktype[2][playerpos[turn - 1]] - 1];
             }
+            playericon[turn - 1].style.width = "17px";
             if (turn >= playernum) {
                 turn = 0;
             }
@@ -201,6 +208,7 @@ $(() => {
                       document.getElementById("chanceword").innerHTML = "";
                   }, 1000);*/
             }
+            playericon[turn - 1].style.width = "35px";
             for (i = 0; i < playernum; i++) {
                 if (playerMoney[i] <= 0) {
                     alert(playername[i] + "已破產!");
@@ -215,7 +223,10 @@ $(() => {
                         window.location.reload();
                     }
                 }
-            } //else { alert("輪到" + playername[turn - 1] + "擲骰"); }
+            }
+
+
+            //else { alert("輪到" + playername[turn - 1] + "擲骰"); }
 
         }, 100);
         //alert(playerpos[turn - 1]);
