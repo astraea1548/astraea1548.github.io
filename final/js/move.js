@@ -147,7 +147,7 @@ $(() => {
                     chancetext = '付學費<br>減少1500元';
                     playerMoney[turn - 1] -= 1500;
                 } else if (chancenum == 2) {
-                    chancetext = '申請獎學金成功<br>獲得2400元';
+                    chancetext = '申請獎學金<br>獲得2400元';
                     playerMoney[turn - 1] += 2400;
                 }
                 document.getElementById(playername[turn - 1] + "Money").innerHTML = playername[turn - 1] + ": " + playerMoney[turn - 1];
