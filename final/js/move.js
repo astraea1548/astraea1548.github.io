@@ -69,6 +69,10 @@ $(() => {
     })
 
     $('#throw_dice').on('click', () => {
+        document.getElementById("fatecard").src = "image/fate card.jpg";
+        document.getElementById("fateword").innerHTML = "";
+        document.getElementById("chancecard").src = "image/chance card.jpg";
+        document.getElementById("chanceword").innerHTML = "";
 
         playernum = $("#playerNumber").val();
         while (givemoney == false) {
@@ -109,26 +113,38 @@ $(() => {
             //alert("看看走到哪");
             if (playerpos[turn - 1] == 2 || playerpos[turn - 1] == 17 || playerpos[turn - 1] == 33) {
                 alert("抽一張命運卡");
-                var fatenum = Math.floor(Math.random() * 1);
+                playerMoney[turn - 1]++;
+                playerMoney[turn - 1]--;
+                var fatenum = Math.floor(Math.random() * 2);
                 var fatetext;
                 if (fatenum == 0) {
                     fatetext = '經營小本生意<br>獲得1000元';
                     playerMoney[turn - 1] += 1000;
-                    alert("現在有" + playerMoney[turn - 1]);
-                    document.getElementById(playername[turn - 1] + "Money").innerHTML = playername[turn - 1] + ": " + playerMoney[turn - 1];
+                } else if (fatenum == 1) {
+                    fatetext = '拘票<br>立即坐牢!';
+                    playerpos[turn - 1] = 10;
+                    playericon[turn - 1].style.left = blockx[10] + "px";
+                    playericon[turn - 1].style.top = blocky[10] + "px";
+                    injailcheck[turn - 1] = true;
                 }
+                document.getElementById(playername[turn - 1] + "Money").innerHTML = playername[turn - 1] + ": " + playerMoney[turn - 1];
                 document.getElementById("fatecard").src = "image/white.png";
                 document.getElementById("fateword").innerHTML = fatetext;
             } else if (playerpos[turn - 1] == 7 || playerpos[turn - 1] == 22 || playerpos[turn - 1] == 36) {
                 alert("抽一張機會卡");
-                var chancenum = Math.floor(Math.random() * 1);
+                playerMoney[turn - 1]++;
+                playerMoney[turn - 1]--;
+                var chancenum = Math.floor(Math.random() * 2);
                 var chancetext;
                 if (chancenum == 0) {
-                    chancetext = '種樂透<br>獲得2000元';
+                    chancetext = '中樂透<br>獲得2000元';
+
                     playerMoney[turn - 1] += 2000;
-                    alert("現在有" + playerMoney[turn - 1]);
-                    document.getElementById(playername[turn - 1] + "Money").innerHTML = playername[turn - 1] + ": " + playerMoney[turn - 1];
+                } else if (chancenum == 1) {
+                    chancetext = '付學費<br>減少2000元';
+                    playerMoney[turn - 1] -= 2000;
                 }
+                document.getElementById(playername[turn - 1] + "Money").innerHTML = playername[turn - 1] + ": " + playerMoney[turn - 1];
                 document.getElementById("chancecard").src = "image/white.png";
                 document.getElementById("chanceword").innerHTML = chancetext;
             } else if (playerpos[turn - 1] == 4 || playerpos[turn - 1] == 38) {
@@ -139,6 +155,7 @@ $(() => {
 
             } else if (playerpos[turn - 1] == 30) {
                 alert("前往監獄 並暫停一回合!");
+                playerpos[turn - 1] = 10;
                 playericon[turn - 1].style.left = blockx[10] + "px";
                 playericon[turn - 1].style.top = blocky[10] + "px";
                 injailcheck[turn - 1] = true;
@@ -177,6 +194,12 @@ $(() => {
                 }
                 document.getElementById("playerthrow").innerHTML = "輪到" + playername[turn - 1];
                 $("#playerthrow").css("color", playercolor[turn - 1]);
+                /*  setTimeout(() => {
+                      document.getElementById("fatecard").src = "image/fate card.jpg";
+                      document.getElementById("fateword").innerHTML = "";
+                      document.getElementById("chancecard").src = "image/chance card.jpg";
+                      document.getElementById("chanceword").innerHTML = "";
+                  }, 1000);*/
             }
             for (i = 0; i < playernum; i++) {
                 if (playerMoney[i] <= 0) {
@@ -197,7 +220,6 @@ $(() => {
         }, 100);
         //alert(playerpos[turn - 1]);
         //1 || 3 || 5 || 6 || 8 || 9 || 11 || 12 || 13 || 14 || 15 || 16 || 18 || 19 || 21 || 23 || 25 || 26 || 27 || 28 || 29 || 31 || 32 || 34 || 35 || 37 || 39
-
     })
 
 })
