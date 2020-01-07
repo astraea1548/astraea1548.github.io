@@ -218,6 +218,8 @@ $(() => {
                 if (playerMoney[i] <= 0) {
                     //alert("剩" + playerMoney[i]);
                     alert(playername[i] + "已破產!");
+                    playericon[i].style.visibility = "hidden";
+                    document.getElementById(playername[i] + "Money").style.visibility = "hidden";
                     bankruptcheck[i] = true;
                     bankrupt++;
                 }
